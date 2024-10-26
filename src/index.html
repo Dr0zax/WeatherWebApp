@@ -1,11 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Web App</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1><a href="index.html">Weather Web App</a></h1>
+      <nav>
+        <ul>
+          <li><a href="#">Current Weather</a></li>
+          <li><a href="#">Search Location</a></li>
+          <li>
+            <div class="dropdown">
+              <button class="dropbtn">Settings</button>
+              <div class="dropdown-content">
+                <div class="dropdown-item">
+                  <p>Units</p>
+                  <label class="switch">
+                    <input type="checkbox"/>
+                    <span class="slider round"></span>
+                  </label>
+                </div>  
+                <div class="dropdown-item">
+                  <p>Location</p>
+                  <input type="text" placeholder="ZIP CODE" value="83440">
+              </div>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="content">
+        <div class="weather">
+          <p class="location">Rexburg</p>
+          <p class="temperature">64°</p>
+          <div class="temp-range">
+            <p>H:64°</p>
+            <p>L:32°</p>
+          </div>
+        </div>
+        <section class="forecasts">
+          <h2>Hourly Forecast</h2>
+          <div class="forecast hourly">
+            <div>
+              <p class="time">Now</p>
+              <p class="condition">Sunny</p>
+              <p class="temp">64°</p>
+            </div>
+            <div>
+              <p class="time">5<span>PM</span></p>
+              <p class="condition">Sunny</p>
+              <p class="temp">63°</p>
+            </div>
+            <div>
+              <p class="time">6<span>PM</span></p>
+              <p class="condition">Sunny</p>
+              <p class="temp">60°</p>
+            </div>
+            <div>
+              <p class="time">7<span>PM</span></p>
+              <p class="condition">Night</p>
+              <p class="temp">59°</p>
+            </div>
+            <div>
+              <p class="time">8<span>PM</span></p>
+              <p class="condition">Night</p>
+              <p class="temp">54°</p>
+            </div>
+            <div>
+              <p class="time">9<span>PM</span></p>
+              <p class="condition">Night</p>
+              <p class="temp">49°</p>
+            </div>
+            <div>
+              <p class="time">10<span>PM</span></p>
+              <p class="condition">Night</p>
+              <p class="temp">48°</p>
+            </div>
+            <div>
+              <p class="time">11<span>PM</span></p>
+              <p class="condition">Night</p>
+              <p class="temp">59°</p>
+            </div>
+          </div>
+          <h2>7-Day Forecast</h2>
+          <div class="forecast daily">
+            <div>
+              <p class="day">Today</p>
+              <p class="condition">Sunny</p>
+              <p class="temp">64°</p>
+            </div>
+            <div>
+              <p class="day-name">Tomorrow</p>
+              <p class="condition">Cloudy</p>
+              <p class="temp">64°</p>
+            </div>
+            <div>
+              <p class="day-name">Saturday</p>
+              <p class="condition">Sunny</p>
+              <p class="temp">64°</p>
+            </div>
+            <div>
+              <p class="day-name">Sunday</p>
+              <p class="condition">Rainy</p>
+              <p class="temp">64°</p>
+            </div>
+            <div>
+              <p class="day-name">Monday</p>
+              <p class="condition">Cloudy</p>
+              <p class="temp">64°</p>
+            </div>
+            <div>
+              <p class="day-name">Tuesday</p>
+              <p class="condition">Windy</p>
+              <p class="temp">64°</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <footer>
+      <p>&copy;2024 Andrew Jeppesen, Everest Wilkey</p>
+      <p><a href="#">Contact</a></p>
+    </footer>
+  </body>
 </html>
