@@ -28,7 +28,7 @@ units.addEventListener("change", () => {
 // TODO: perhaps pull sunrise and sunset times from the api and find proper colors
 const setGradient = () => {
     let time = new Date();
-    let hours = 18;
+    let hours = time.getHours();
     
     if (hours < 7) {
         currentWeather.style.background = "linear-gradient(0deg, rgb(105, 65, 65), rgb(60, 167, 255))";
