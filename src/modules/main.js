@@ -25,18 +25,21 @@ units.addEventListener("change", () => {
 
 // code for changing the gradient behind the current weather section
 // it changes the gradient depending on the time of day
-// TODO: perhaps pull sunrise and sunset times from the api for use
+// TODO: perhaps pull sunrise and sunset times from the api and find proper colors
 const setGradient = () => {
     let time = new Date();
-    let hours = time.getHours();
-
+    let hours = 18;
+    
     if (hours < 7) {
-        currentWeather.style.background = "linear-gradient(0deg, #522722, #4252A3)";
+        currentWeather.style.background = "linear-gradient(0deg, rgb(105, 65, 65), rgb(60, 167, 255))";
     } else if (hours >= 7 && hours < 18) {
-        currentWeather.style.background = "linear-gradient(0deg, rgb(60, 167, 255) 0%, rgb(132, 200, 255) 100%)";
-    } else {
-        currentWeather.style.background = "linear-gradient(0deg, #522722, #182568)";
+        currentWeather.style.background = "linear-gradient(0deg, rgb(60, 167, 255), rgb(132, 200, 255))";
+    } else if (hours >= 18 && hours < 19) {
+        currentWeather.style.background = "linear-gradient(0deg, rgb(105, 65, 65), rgb(66, 82, 163))";
+    } else  {
+        currentWeather.style.background = "linear-gradient(0deg, rgb(24, 37, 104), rgb(0, 0, 0))";
     }
+        
 }
 
 setGradient();
