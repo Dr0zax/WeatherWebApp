@@ -1,4 +1,6 @@
 import { get3HourForecast } from "./weather-api/get3hourforcast.mjs";
+import displayNext3HourForecast from "./weather-api/template/3hourforcast.mjs";
+
 
 // let weather = await get3HourForecast()
 
@@ -47,3 +49,7 @@ const setGradient = () => {
 }
 
 setGradient();
+async function getdata(){
+let weather = await get3HourForecast(); // Wait until the forecast data is resolved
+displayNext3HourForecast(weather);}
+getdata()

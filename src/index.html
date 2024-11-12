@@ -19,7 +19,10 @@
               <div class="dropdown-content">
                 <div class="dropdown-item">
                   <form action="" class="search-form">
-                    <input id="location" type="text" placeholder="Search Location" />
+                    <input
+                      id="location"
+                      type="text"
+                      placeholder="Search Location" />
                     <button type="submit">Search</button>
                   </form>
                 </div>
@@ -36,11 +39,11 @@
                     <option value="Farhenheit">Farhenheit</option>
                     <option value="Celsius">Celsius</option>
                   </select>
-                </div>  
+                </div>
                 <div class="dropdown-item">
                   <p>Theme</p>
                   <label class="switch">
-                    <input type="checkbox"/>
+                    <input type="checkbox" />
                     <span class="slider round"></span>
                   </label>
                 </div>
@@ -63,33 +66,7 @@
         <section class="weather-info">
           <section class="forecasts">
             <h2>Hourly Forecast</h2>
-            <div class="forecast hourly">
-              <div>
-                <p class="time">Now</p>
-                <p class="condition">Sunny</p>
-                <p class="temp">64°</p>
-              </div>
-              <div>
-                <p class="time">5<span>PM</span></p>
-                <p class="condition">Sunny</p>
-                <p class="temp">63°</p>
-              </div>
-              <div>
-                <p class="time">6<span>PM</span></p>
-                <p class="condition">Sunny</p>
-                <p class="temp">60°</p>
-              </div>
-              <div>
-                <p class="time">7<span>PM</span></p>
-                <p class="condition">Night</p>
-                <p class="temp">59°</p>
-              </div>
-              <div>
-                <p class="time">8<span>PM</span></p>
-                <p class="condition">Night</p>
-                <p class="temp">54°</p>
-              </div>
-            </div>
+            <div id="forecast-container" class="forecast hourly"></div>
             <h2>7-Day Forecast</h2>
             <div class="forecast daily">
               <div>
