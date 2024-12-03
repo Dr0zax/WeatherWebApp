@@ -19,4 +19,5 @@ export async function get7DayForecast() {
         let data = response.json()
         console.log(data)
         const forecast = await 
+        fixed
 }
