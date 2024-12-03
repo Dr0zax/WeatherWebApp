@@ -1,6 +1,6 @@
 
-// this is the URL for the api request
-const baseURL = "https://api.openweathermap.org/data/2.5/forecast?"
+
+const pointsBaseURL = "https://api.weather.gov/points/";
 // this is the location
 let lat = "43.825386"
 let long = "-111.792824"
@@ -27,6 +27,5 @@ export async function get3HourForecast(){
         let response = await fetch(`${pointsBaseURL}${lat},${long}}`,options)
         let data = response.json()
         console.log(data)
-        const forecast = await 
-        fixed
+        
 }
