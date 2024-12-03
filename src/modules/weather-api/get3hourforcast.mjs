@@ -18,32 +18,15 @@ export async function get3HourForecast(){
 
     // set the header request
     const options = {
-        method: "GET",
-        headers: {
-            "appid": apikey
+        method: 'GET',
+        headers:{
+                "User-agent": "weatherwebapp (youmom@gmail.com)",
+                "Accept": "application/ld+json",
+            }
         }
-
-        };
-        // tries to get the jason object
-        try{
-            const response = await fetch(`${baseURL}lat=${lat}&lon=${long}&appid=${apikey}&units=standard`);
-
-            // give and error if the object is not status code 200
-            if(!response.ok){
-                throw new Error("Failed to Get Weather Forecast")
-        }
-        // creates the javascript object
-        let threehourforcast = await response.json();
-        // use this to see the response object in the console 
-        console.log(threehourforcast);
-        //retuns the javascript object to be stored.
-        return threehourforcast
-
-        }
-        //catches any erro that is made in the api request or retrieving 
-        catch(error) {
-            console.log(error)
-            return[]
-        }  
-    
-    }   
+        let response = await fetch(`${pointsBaseURL}${lat},${long}}`,options)
+        let data = response.json()
+        console.log(data)
+        const forecast = await 
+        fixed
+}
