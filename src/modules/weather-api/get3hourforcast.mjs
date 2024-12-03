@@ -1,10 +1,9 @@
 const pointsBaseURL = "https://api.weather.gov/points/";
 // Location coordinates
-let lat = "43.825386";
-let long = "-111.792824";
+
 
 // This function gets the weather data from the NWS API
-export async function getForecast() {
+export async function getForecast(lat,long) {
     try {
         // Set the header for the API request
         const options = {
