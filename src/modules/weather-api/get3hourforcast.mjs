@@ -18,5 +18,5 @@ export async function get7DayForecast() {
         let response = await fetch(`${pointsBaseURL}${lat},${long}}`,options)
         let data = response.json()
         console.log(data)
-        const forecast = await 
+        
 }
