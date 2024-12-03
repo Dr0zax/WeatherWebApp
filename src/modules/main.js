@@ -1,5 +1,6 @@
-import { get3HourForecast } from "./weather-api/get3hourforcast.mjs";
-import displayNext3HourForecast from "./weather-api/template/3hourforcast.mjs";
+import sevendayDisplay from "./weather-api/displayValues.mjs";
+import {getForecast } from "./weather-api/get3hourforcast.mjs";
+
 
 // let weather = await get3HourForecast()
 
@@ -24,6 +25,7 @@ units.addEventListener("change", () => {
 })
 
 async function getdata(){
-let weather = await get3HourForecast(); // Wait until the forecast data is resolved
-displayNext3HourForecast(weather);}
+let weather = await getForecast();
+sevendayDisplay(weather)
+}
 getdata()

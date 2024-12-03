@@ -1,31 +1,50 @@
-
-
 const pointsBaseURL = "https://api.weather.gov/points/";
-// this is the location
-let lat = "43.825386"
-let long = "-111.792824"
-//TODO Add the location getter for open street maps 
-let units = ""
-// Gets the api Key
-const apikey = import.meta.env.VITE_WEATHER_API_KEY;
+// Location coordinates
+let lat = "43.825386";
+let long = "-111.792824";
 
-// Uncomment this to see the api Key or if you have issues with the api key
-// console.log("api key below!")
-// console.log(apikey)
-
-// this function get the weather data from openweathermap api
-export async function get3HourForecast(){
-
-    // set the header request
-    const options = {
-        method: 'GET',
-        headers:{
+// This function gets the weather data from the NWS API
+export async function getForecast() {
+    try {
+        // Set the header for the API request
+        const options = {
+            method: 'GET',
+            headers: {
                 "User-agent": "weatherwebapp (youmom@gmail.com)",
-                "Accept": "application/ld+json",
+                "Accept": "application/json",
             }
+        };
+
+        // Step 1: Get the grid point data for the given coordinates
+        let response = await fetch(`${pointsBaseURL}${lat},${long}`, options);
+
+        // Check if the response is OK
+        if (!response.ok) {
+            throw new Error(`Failed to fetch grid points: ${response.status}`);
         }
-        let response = await fetch(`${pointsBaseURL}${lat},${long}}`,options)
-        let data = response.json()
-        console.log(data)
-        
+
+        let data = await response.json();
+
+        // Extract the forecast URL from the grid point response
+        const forecastURL = data.properties.forecast;
+
+        // Step 2: Fetch the forecast data using the forecast URL
+        response = await fetch(forecastURL, options);
+
+        if (!response.ok) {
+            throw new Error(`Failed to fetch forecast data: ${response.status}`);
+        }
+
+        let forecastData = await response.json();
+
+        // Log the forecast data
+        console.log(forecastData);
+
+        // Process the forecast data (example: log temperature and short description)
+   
+
+        return forecastData.properties.periods;
+    } catch (error) {
+        console.error("Error fetching weather data:", error);
+    }
 }
