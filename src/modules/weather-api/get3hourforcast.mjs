@@ -1,9 +1,10 @@
 const pointsBaseURL = "https://api.weather.gov/points/";
 // Location coordinates
 
-
 // This function gets the weather data from the NWS API
 export async function getForecast(lat,long) {
+    const units = document.getElementById("units");
+    const unitValue = units.checked ? "si" : "us";
     try {
         // Set the header for the API request
         const options = {
@@ -28,7 +29,7 @@ export async function getForecast(lat,long) {
         const forecastURL = data.properties.forecast;
 
         // Step 2: Fetch the forecast data using the forecast URL
-        response = await fetch(forecastURL, options);
+        response = await fetch(forecastURL + `?units=${unitValue}`, options);
 
         if (!response.ok) {
             throw new Error(`Failed to fetch forecast data: ${response.status}`);

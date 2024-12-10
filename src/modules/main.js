@@ -3,10 +3,6 @@ import sevendayDisplay from "./weather-api/displayValues.mjs";
 import {getForecast } from "./weather-api/get3hourforcast.mjs";
 import getLocation from "./weather-api/Getlocationonsubmit.mjs";
 
-
-
-
-
 // let weather = await get3HourForecast()
 
 const units = document.getElementById("units")
@@ -16,11 +12,11 @@ window.addEventListener("load", () => {
     let savedUnits = localStorage.getItem("units")
     let savedLocation = localStorage.getItem("location")
 
-    if (savedUnits) {
+    if (savedUnits != null) {
         units.checked = savedUnits
     }
 
-    if (savedLocation) {
+    if (savedLocation != null) {
         location.value = savedLocation
     }
 })
