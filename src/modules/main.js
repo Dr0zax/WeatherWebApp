@@ -1,7 +1,10 @@
 
+import displayHourlyForecast from "./weather-api/displayhourlyvalues.mjs";
 import sevendayDisplay from "./weather-api/displayValues.mjs";
-import {getForecast } from "./weather-api/get3hourforcast.mjs";
+import { getForecast } from "./weather-api/get3hourforcast.mjs";
 import getLocation from "./weather-api/Getlocationonsubmit.mjs";
+import { getHourlyForecast } from "./weather-api/hourlyforcast.mjs";
+import HourlyForecastTemplate from "./weather-api/template/hourlytemplate.mjs";
 
 // let weather = await get3HourForecast()
 
@@ -25,44 +28,47 @@ units.addEventListener("change", () => {
     localStorage.setItem("units", units.checked)
 })
 
-async function getdata(){
+async function getdata() {
     // Target the form
-const form = document.querySelector('.search-form');
+    const form = document.querySelector('.search-form');
 
-// Ensure the form exists
-if (form) {
-    // Add a submit event listener
-    form.addEventListener('submit', async (event) => {
-        event.preventDefault(); // Prevent form submission and page reload
+    // Ensure the form exists
+    if (form) {
+        // Add a submit event listener
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Prevent form submission and page reload
 
-        // Get the value of the location input field
-        const locationInput = document.getElementById('location').value.trim();
+            // Get the value of the location input field
+            const locationInput = document.getElementById('location').value.trim();
 
-        if (locationInput) {
-            console.log(`Searching for weather in: ${locationInput}`);
-            
-            // Call your functions here, e.g., getLocation or getForecast
-            try {
-                const locationData = await getLocation(locationInput); // Ensure getLocation is defined and works
-                console.log('Location Data:', locationData);
-                const latitude = parseFloat(locationData.lat);
-                const longitude = parseFloat(locationData.lon);
+            if (locationInput) {
+                console.log(`Searching for weather in: ${locationInput}`);
+
+                // Call your functions here, e.g., getLocation or getForecast
+                try {
+                    const locationData = await getLocation(locationInput); // Ensure getLocation is defined and works
+                    console.log('Location Data:', locationData);
+                    const latitude = parseFloat(locationData.lat);
+                    const longitude = parseFloat(locationData.lon);
 
 
-                const weather = await getForecast(latitude, longitude); // Ensure getForecast is defined
-                console.log('Weather Data:', weather);
-
-                sevendayDisplay(weather); // Ensure sevendayDisplay is defined
-            } catch (error) {
-                console.error('Error fetching weather data:', error);
+                    const weather = await getForecast(latitude, longitude);
+                    const hourly = await getHourlyForecast(latitude, longitude) // Ensure getForecast is defined
+                    console.log('Weather Data:', weather);
+                    console.log('Hourly', hourly)
+                    sevendayDisplay(weather);
+                    displayHourlyForecast(hourly)
+                    // Ensure sevendayDisplay is defined
+                } catch (error) {
+                    console.error('Error fetching weather data:', error);
+                }
+            } else {
+                alert('Please enter a location.');
             }
-        } else {
-            alert('Please enter a location.');
-        }
-    });
-} else {
-    console.error('Form with class "search-form" not found.');
-}
+        });
+    } else {
+        console.error('Form with class "search-form" not found.');
+    }
 
 
 
