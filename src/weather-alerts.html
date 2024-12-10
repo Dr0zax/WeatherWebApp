@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Web App</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1><a href="index.html">Weather Web App</a></h1>
+        <nav>
+          <ul>
+            <li><a href="#">Weather Alerts</a></li>
+            <li>
+              <div class="dropdown search">
+                <button class="dropbtn">Search Location</button>
+                <div class="dropdown-content">
+                  <div class="dropdown-item">
+                    <form action="" class="search-form">
+                      <input
+                        id="location"
+                        type="text"
+                        placeholder="Search Location"
+                      />
+                      <button id="locationButton" type="submit">Search</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="dropdown settings">
+                <button class="dropbtn">Settings</button>
+                <div class="dropdown-content">
+                  <div class="dropdown-item">
+                    <p>Fahrenheit</p>
+                    <label class="switch">
+                      <input type="checkbox" id="units" />
+                      <span class="slider round"></span>
+                    </label>
+                    <p>Celsius</p>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </header>
+</body>
+</html>

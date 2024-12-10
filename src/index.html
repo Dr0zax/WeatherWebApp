@@ -12,7 +12,7 @@
       <h1><a href="index.html">Weather Web App</a></h1>
       <nav>
         <ul>
-          <li><a href="#">Weather Alerts</a></li>
+          <li><a href="weather-alerts.html">Weather Alerts</a></li>
           <li>
             <div class="dropdown search">
               <button class="dropbtn">Search Location</button>
@@ -22,7 +22,8 @@
                     <input
                       id="location"
                       type="text"
-                      placeholder="Search Location" />
+                      placeholder="Search Location"
+                    />
                     <button id="locationButton" type="submit">Search</button>
                   </form>
                 </div>
@@ -36,7 +37,7 @@
                 <div class="dropdown-item">
                   <p>Fahrenheit</p>
                   <label class="switch">
-                    <input type="checkbox" id="units"/>
+                    <input type="checkbox" id="units" />
                     <span class="slider round"></span>
                   </label>
                   <p>Celsius</p>
@@ -50,17 +51,19 @@
     <main>
       <div class="content">
         <section class="current-weather">
-          <p class="location">Rexburg</p>
-          <p class="temperature">64°</p>
+          <p class="location">No Location Set</p>
+          <p class="temperature">0°</p>
           <div class="temp-range">
-            <p>H:64°</p>
-            <p>L:32°</p>
+            <p>H:0°</p>
+            <p>L:0°</p>
           </div>
         </section>
         <section class="weather-info">
           <section class="forecasts">
             <h2>Hourly Forecast</h2>
-            <div id="forecast-container" class="forecast hourly"></div>
+            <div id="forecast-container" class="forecast hourly">
+              
+            </div>
             <h2>7-Day Forecast</h2>
             <div class="forecast daily">
               

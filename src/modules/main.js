@@ -17,7 +17,7 @@ window.addEventListener("load", () => {
     let savedLocation = localStorage.getItem("location")
 
     if (savedUnits) {
-        units.value = savedUnits
+        units.checked = savedUnits
     }
 
     if (savedLocation) {
@@ -26,7 +26,7 @@ window.addEventListener("load", () => {
 })
 
 units.addEventListener("change", () => {
-    localStorage.setItem("units", units.value)
+    localStorage.setItem("units", units.checked)
 })
 
 async function getdata(){

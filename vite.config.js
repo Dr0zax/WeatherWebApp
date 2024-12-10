@@ -10,6 +10,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, "src/index.html"),
+        weatherAlerts: resolve(__dirname, "src/weather-alerts.html"),
       }
     },
   },
