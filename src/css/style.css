@@ -301,6 +301,47 @@ main {
   font-size: 0.8rem;
 }
 
+.alerts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  padding: 20px;
+}
+
+.alert {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 2px solid #bbb;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.severity {
+  font-size: 1.5rem;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+}
+
+.severity.severe {
+  background-color: red;
+  color: #FFF;
+}
+
+.alert-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+}
+
 footer {
   display: flex;
   /* justify-content: center; */

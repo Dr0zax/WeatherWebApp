@@ -1,52 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather Web App</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css" />
     <script type="module" src="modules/main.js" defer></script>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <h1><a href="index.html">Weather Web App</a></h1>
-        <nav>
-          <ul>
-            <li><a href="#">Weather Alerts</a></li>
-            <li>
-              <div class="dropdown search">
-                <button class="dropbtn">Search Location</button>
-                <div class="dropdown-content">
-                  <div class="dropdown-item">
-                    <form action="" class="search-form">
-                      <input
-                        id="location"
-                        type="text"
-                        placeholder="Search Location"
-                      />
-                      <button id="locationButton" type="submit">Search</button>
-                    </form>
-                  </div>
+      <h1><a href="index.html">Weather Web App</a></h1>
+      <nav>
+        <ul>
+          <li><a href="#">Weather Alerts</a></li>
+          <li>
+            <div class="dropdown search">
+              <button class="dropbtn">Search Location</button>
+              <div class="dropdown-content">
+                <div class="dropdown-item">
+                  <form action="" class="search-form">
+                    <input
+                      id="location"
+                      type="text"
+                      placeholder="Search Location"
+                    />
+                    <button id="locationButton" type="submit">Search</button>
+                  </form>
                 </div>
               </div>
-            </li>
-            <li>
-              <div class="dropdown settings">
-                <button class="dropbtn">Settings</button>
-                <div class="dropdown-content">
-                  <div class="dropdown-item">
-                    <p>Fahrenheit</p>
-                    <label class="switch">
-                      <input type="checkbox" id="units" />
-                      <span class="slider round"></span>
-                    </label>
-                    <p>Celsius</p>
-                  </div>
+            </div>
+          </li>
+          <li>
+            <div class="dropdown settings">
+              <button class="dropbtn">Settings</button>
+              <div class="dropdown-content">
+                <div class="dropdown-item">
+                  <p>Fahrenheit</p>
+                  <label class="switch">
+                    <input type="checkbox" id="units" />
+                    <span class="slider round"></span>
+                  </label>
+                  <p>Celsius</p>
                 </div>
               </div>
-            </li>
-          </ul>
-        </nav>
-      </header>
-</body>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+        <div class="content">
+            <section class="alerts">
+                <div class="alert">
+                    <section class="severity severe">
+                        <h1><span id="severity">Severe</span> Alert</h2>
+                    </section>
+                    <section class="alert-content">
+                       <h2 class="headline">Severe Winter Weather</h2>
+                       <p class="time">Effective: <span>2024-12-11T21:57:30.441Z</span> Expires: <span>2024-12-11T21:57:30.441</span></p>
+                       <p class="Counties">Jefferson, Bonneville, Oswego Counties</p>
+                       <p class="description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, repudiandae. Mollitia laudantium libero, nostrum corrupti sed ut quidem. Veniam sapiente, quo cum earum alias libero ab dolor sed nulla dignissimos?</p>
+                    </section>
+                </div>
+            </section>
+        </div>
+    </main>
+    <footer>
+      <p>&copy;2024 Andrew Jeppesen, Everest Wilkey</p>
+    </footer>
+  </body>
 </html>
