@@ -1,7 +1,7 @@
 export default function createAlertHTML(feature) {
     return `
         <div class="alert">
-            <section class="severity ${(feature.properties.severity || "Unknown").toLowerCase()}">
+            <section class="severity${(feature.properties.severity || "Unknown")}">
                 <h1><span id="severity">${feature.properties.severity || "Unknown"}</span> Alert</h1>
             </section>
             <section class="alert-content">
