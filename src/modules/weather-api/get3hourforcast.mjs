@@ -2,7 +2,7 @@ const pointsBaseURL = "https://api.weather.gov/points/";
 // Location coordinates
 
 // This function gets the weather data from the NWS API
-export async function getForecast(lat,long) {
+export async function getForecast(lat, long) {
     const units = document.getElementById("units");
     const unitValue = units.checked ? "si" : "us";
     try {
@@ -41,7 +41,7 @@ export async function getForecast(lat,long) {
         console.log(forecastData);
 
         // Process the forecast data (example: log temperature and short description)
-   
+
 
         return forecastData.properties.periods;
     } catch (error) {

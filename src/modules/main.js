@@ -1,76 +1,97 @@
-
+import displayAlerts from "./weather-api/displayalerts.mjs";
 import displayHourlyForecast from "./weather-api/displayhourlyvalues.mjs";
 import sevendayDisplay from "./weather-api/displayValues.mjs";
 import { getForecast } from "./weather-api/get3hourforcast.mjs";
+import { getAlerts } from "./weather-api/getAlerts.mjs";
 import getLocation from "./weather-api/Getlocationonsubmit.mjs";
 import { getHourlyForecast } from "./weather-api/hourlyforcast.mjs";
-import HourlyForecastTemplate from "./weather-api/template/hourlytemplate.mjs";
 
-// let weather = await get3HourForecast()
-
-const units = document.getElementById("units")
-const location = document.getElementById("location")
+const units = document.getElementById("units");
+const locationInputField = document.getElementById("location");
 
 window.addEventListener("load", () => {
-    let savedUnits = localStorage.getItem("units")
-    let savedLocation = localStorage.getItem("location")
+    let savedUnits = localStorage.getItem("units");
+    let savedLocation = localStorage.getItem("location");
+    let savedLat = parseFloat(localStorage.getItem("lat"));
+    let savedLong = parseFloat(localStorage.getItem("long"));
 
     if (savedUnits != null) {
-        units.checked = savedUnits
+        units.checked = savedUnits === "true";
     }
 
     if (savedLocation != null) {
-        location.value = savedLocation
+        locationInputField.value = savedLocation;
     }
-})
+
+    // If we have valid coordinates in localStorage, fetch and display data automatically
+    if (!isNaN(savedLat) && !isNaN(savedLong)) {
+        console.log("Using stored coordinates:", savedLat, savedLong);
+        fetchAndDisplayWeather(savedLat, savedLong);
+    }
+});
 
 units.addEventListener("change", () => {
-    localStorage.setItem("units", units.checked)
-})
+    localStorage.setItem("units", units.checked);
+});
+
+async function fetchAndDisplayWeather(lat, long) {
+    try {
+        const weather = await getForecast(lat, long);
+        const hourly = await getHourlyForecast(lat, long);
+        const alerts = await getAlerts(lat, long);
+
+        console.log('Weather Data:', weather);
+        console.log('Hourly:', hourly);
+        console.log('Alerts:', alerts);
+
+        sevendayDisplay(weather);
+        displayHourlyForecast(hourly);
+        displayAlerts(alerts);
+    } catch (error) {
+        console.error('Error fetching weather data:', error);
+    }
+}
 
 async function getdata() {
-    // Target the form
     const form = document.querySelector('.search-form');
 
-    // Ensure the form exists
-    if (form) {
-        // Add a submit event listener
-        form.addEventListener('submit', async (event) => {
-            event.preventDefault(); // Prevent form submission and page reload
-
-            // Get the value of the location input field
-            const locationInput = document.getElementById('location').value.trim();
-
-            if (locationInput) {
-                console.log(`Searching for weather in: ${locationInput}`);
-
-                // Call your functions here, e.g., getLocation or getForecast
-                try {
-                    const locationData = await getLocation(locationInput); // Ensure getLocation is defined and works
-                    console.log('Location Data:', locationData);
-                    const latitude = parseFloat(locationData.lat);
-                    const longitude = parseFloat(locationData.lon);
-
-
-                    const weather = await getForecast(latitude, longitude);
-                    const hourly = await getHourlyForecast(latitude, longitude) // Ensure getForecast is defined
-                    console.log('Weather Data:', weather);
-                    console.log('Hourly', hourly)
-                    sevendayDisplay(weather);
-                    displayHourlyForecast(hourly)
-                    // Ensure sevendayDisplay is defined
-                } catch (error) {
-                    console.error('Error fetching weather data:', error);
-                }
-            } else {
-                alert('Please enter a location.');
-            }
-        });
-    } else {
+    if (!form) {
         console.error('Form with class "search-form" not found.');
+        return;
     }
 
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const locationInput = locationInputField.value.trim();
 
+        if (locationInput) {
+            console.log(`Searching for weather in: ${locationInput}`);
+            try {
+                const locationData = await getLocation(locationInput);
+                console.log('Location Data:', locationData);
+                const latitude = parseFloat(locationData.lat);
+                const longitude = parseFloat(locationData.lon);
 
+                if (!isNaN(latitude) && !isNaN(longitude)) {
+                    // Store location and coordinates in localStorage
+                    localStorage.setItem("location", locationInput);
+                    localStorage.setItem("lat", latitude);
+                    localStorage.setItem("long", longitude);
+
+                    // Fetch and display weather using the newly obtained coordinates
+                    fetchAndDisplayWeather(latitude, longitude);
+                } else {
+                    console.error("Invalid coordinates from location service.");
+                    alert("Unable to determine coordinates. Please try another location.");
+                }
+            } catch (error) {
+                console.error('Error fetching location data:', error);
+                alert('Unable to fetch location data. Please try again.');
+            }
+        } else {
+            alert('Please enter a location.');
+        }
+    });
 }
-getdata()
+
+getdata();
