@@ -9,6 +9,11 @@ import { getHourlyForecast } from "./weather-api/hourlyforcast.mjs";
 const units = document.getElementById("units");
 const locationInputField = document.getElementById("location");
 
+const hero = document.querySelector(".current-weather");
+const heroLocation = document.querySelector(".location");
+const heroTemp = document.querySelector(".temperature");
+const heroTempRange = document.querySelector(".temp-range");
+
 window.addEventListener("load", () => {
     let savedUnits = localStorage.getItem("units");
     let savedLocation = localStorage.getItem("location");
@@ -39,14 +44,21 @@ async function fetchAndDisplayWeather(lat, long) {
         const weather = await getForecast(lat, long);
         const hourly = await getHourlyForecast(lat, long);
         const alerts = await getAlerts(lat, long);
+        const location = await getLocation(lat, long);
 
         console.log('Weather Data:', weather);
         console.log('Hourly:', hourly);
         console.log('Alerts:', alerts);
+        console.log('Location:', location);
 
         sevendayDisplay(weather);
         displayHourlyForecast(hourly);
         displayAlerts(alerts);
+
+        heroLocation.innerHTML = location.name;
+        heroTemp.innerHTML = `${hourly.properties.periods[0].temperature}°`;
+        // heroTempRange.innerHTML = weather..temperatureRange;
+        
     } catch (error) {
         console.error('Error fetching weather data:', error);
     }
