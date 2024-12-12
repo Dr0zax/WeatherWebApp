@@ -5,16 +5,14 @@ import getLocation from "./weather-api/Getlocationonsubmit.mjs";
 const units = document.getElementById("units");
 const locationInputField = document.getElementById("location");
 
-// On page load, try to restore units and location input
 window.addEventListener("load", () => {
     const savedUnits = localStorage.getItem("units");
     const savedLocation = localStorage.getItem("location");
 
     if (savedUnits != null) {
-        units.checked = savedUnits === "true";
+        units.checked = (savedUnits === "true");
     }
 
-    // Check URL params first
     const params = new URLSearchParams(window.location.search);
     const urlLocation = params.get("location");
 
@@ -37,11 +35,10 @@ async function autoFetchAlerts() {
     const params = new URLSearchParams(window.location.search);
     let lat = parseFloat(params.get("lat"));
     let long = parseFloat(params.get("long"));
-
+    let savedloc = (localStorage.getItem("location"))
     const hasValidURLCoords = !isNaN(lat) && !isNaN(long);
 
     if (!hasValidURLCoords) {
-        // Attempt to use localStorage if URL not present or invalid
         const storedLat = parseFloat(localStorage.getItem("lat"));
         const storedLong = parseFloat(localStorage.getItem("long"));
         if (!isNaN(storedLat) && !isNaN(storedLong)) {
@@ -52,17 +49,17 @@ async function autoFetchAlerts() {
 
     const hasValidCoords = !isNaN(lat) && !isNaN(long);
     if (hasValidCoords) {
-        // Fetch alerts with these coordinates
-        fetchAndDisplayAlerts(lat, long);
+        fetchAndDisplayAlerts(lat, long, savedloc);
     } else {
         console.log("No valid coordinates found in URL or localStorage. User must enter a location.");
     }
 }
 
-async function fetchAndDisplayAlerts(lat, long) {
+async function fetchAndDisplayAlerts(lat, long, locationInput) {
     try {
+        updateURLParams(lat, long, locationInput);
         const alerts = await getAlerts(lat, long);
-        console.log("alerts", alerts);
+        console.log("Alerts Data:", alerts);
         displayAlerts(alerts);
     } catch (error) {
         console.error('Error fetching alerts:', error);
@@ -76,7 +73,7 @@ function updateURLParams(lat, long, locationName) {
     if (locationName) {
         url.searchParams.set("location", locationName);
     }
-    // Push state so the URL updates without reloading the page
+    // Update the browser's address bar without reloading the page
     window.history.pushState({}, '', url.toString());
 }
 
