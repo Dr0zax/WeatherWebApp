@@ -50,6 +50,7 @@ window.addEventListener("load", () => {
 
 units.addEventListener("change", () => {
     localStorage.setItem("units", units.checked);
+    fetchAndDisplayWeather(parseFloat(localStorage.getItem("lat")), parseFloat(localStorage.getItem("long")));
 });
 
 async function fetchAndDisplayWeather(lat, long) {
