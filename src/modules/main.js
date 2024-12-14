@@ -12,7 +12,20 @@ const locationInputField = document.getElementById("location");
 const hero = document.querySelector(".current-weather");
 const heroLocation = document.querySelector(".location");
 const heroTemp = document.querySelector(".temperature");
-const heroTempRange = document.querySelector(".temp-range");
+const heroTempRangeHigh = document.querySelector("#high");
+const heroTempRangeLow = document.querySelector("#low");
+
+const dropdownElement = document.querySelectorAll(".dropdown");
+
+dropdownElement.forEach(element => {
+    element.addEventListener("click", (e) => {
+        if (e.target.tagName != "BUTTON") {
+            e.target = e.target.closest("button");
+            e.target.parentElement.querySelector(".dropdown-content").classList.toggle("active");
+        }
+    })
+    
+});
 
 window.addEventListener("load", () => {
     let savedUnits = localStorage.getItem("units");
@@ -45,19 +58,22 @@ async function fetchAndDisplayWeather(lat, long) {
         const hourly = await getHourlyForecast(lat, long);
         const alerts = await getAlerts(lat, long);
         const location = await getLocation(lat, long);
+        const lowAndHigh = getHighAndLow(hourly);
 
         console.log('Weather Data:', weather);
         console.log('Hourly:', hourly);
         console.log('Alerts:', alerts);
         console.log('Location:', location);
+        console.log('Low and High:', lowAndHigh);
 
         sevendayDisplay(weather);
         displayHourlyForecast(hourly);
         displayAlerts(alerts);
 
         heroLocation.innerHTML = location.name;
-        heroTemp.innerHTML = `${hourly.properties.periods[0].temperature}°`;
-        // heroTempRange.innerHTML = weather..temperatureRange;
+        heroTemp.innerHTML = `${hourly.properties.periods[0].temperature}°${units.checked ? "C" : "F"}`;
+        heroTempRangeLow.innerHTML = lowAndHigh[0];
+        heroTempRangeHigh.innerHTML = lowAndHigh[1];
         
     } catch (error) {
         console.error('Error fetching weather data:', error);
@@ -104,6 +120,20 @@ async function getdata() {
             alert('Please enter a location.');
         }
     });
+}
+
+function getHighAndLow(data) {
+    let high = 0;
+    let low = 999;
+
+    let firstTwelvePeriods = data.properties.periods.slice(0, 12);
+    
+    firstTwelvePeriods.forEach(element => {
+        high = Math.max(element.temperature, high);
+        low = Math.min(element.temperature, low);
+    });
+
+    return [low, high]
 }
 
 getdata();
